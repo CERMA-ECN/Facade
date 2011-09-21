@@ -12,6 +12,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".VanishingPointsActivity"></activity>
+        <activity android:name=".FacesChoiceActivity"></activity>
+        <activity android:name=".FacesActivity"></activity>
+        <activity android:name=".FacesSimpleActivity"></activity>
+        <activity android:name=".ResultActivity"></activity>
 
     </application>
 </manifest>

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+    android:gravity="center" android:orientation="vertical">
+    <Button android:text="Charger une image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5dip" android:id="@+id/load_image"></Button>
+    <Button android:text="Prendre une photo" android:layout_width="wrap_content" android:id="@+id/take_picture" android:layout_height="wrap_content" android:layout_margin="5dip"></Button>
 </LinearLayout>

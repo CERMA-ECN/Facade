@@ -2,4 +2,10 @@
 <resources>
     <string name="hello">Hello World, FacadeActivity!</string>
     <string name="app_name">Facade</string>
+	<string name="recompute_groups">Recalculer groupes</string>
+	<string name="menu_addface">Ajouter face</string>
+	<string name="remove_last_face">Enlever la dernière face</string>
+	<string name="menu_validate">Valider</string>
+	<string name="end_face">Terminer la face</string>
+	<string name="cancel_face">Annuler la face</string>
 </resources>

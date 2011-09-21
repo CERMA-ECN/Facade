@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:gravity="center" android:orientation="vertical">
+	<TextView android:text="Veillez selectionner le mode de sélection des faces"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:gravity="center" android:layout_margin="5dip"></TextView>
+	<Button android:text="Sélection simple" android:id="@+id/simple"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_margin="5dip"></Button>
+	<Button android:text="Sélection guidée" android:id="@+id/guided"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_margin="5dip"></Button>
+</LinearLayout>
