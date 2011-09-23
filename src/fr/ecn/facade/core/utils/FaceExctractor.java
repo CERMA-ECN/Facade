@@ -2,8 +2,8 @@ package fr.ecn.facade.core.utils;
 
 import java.util.List;
 
+import fr.ecn.common.geometry.Point;
 import fr.ecn.facade.core.model.Face;
-import fr.ecn.facade.core.model.Point;
 
 public class FaceExctractor {
 	

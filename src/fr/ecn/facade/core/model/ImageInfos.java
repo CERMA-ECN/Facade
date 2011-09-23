@@ -3,6 +3,8 @@ package fr.ecn.facade.core.model;
 import java.io.Serializable;
 import java.util.List;
 
+import fr.ecn.common.geometry.Point;
+
 public class ImageInfos implements Serializable {
 	/**
 	 * 

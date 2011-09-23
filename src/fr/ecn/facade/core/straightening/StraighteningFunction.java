@@ -3,6 +3,8 @@ package fr.ecn.facade.core.straightening;
 import java.util.ArrayList;
 import java.util.List;
 
+import Jama.Matrix;
+
 import fr.ecn.common.geometry.Distance;
 import fr.ecn.common.geometry.Point;
 import fr.ecn.common.image.ColorImage;
@@ -13,6 +15,8 @@ public class StraighteningFunction {
 	private ArrayList<Point> endPoints;
 	private Point horizontalVanishingPoint;
 	
+	protected ColorImage result;
+	
 	/**
 	 * Straightens the fronts delimited by edgesPoints to the given groundDistance/ratio.
 	 * @param edgesPoints
@@ -21,13 +25,13 @@ public class StraighteningFunction {
 	 * @param ratio height/width
 	 * @param pixelPerMeter
 	 */
-	public StraighteningFunction(List<Point> edgesPoints, ColorImage image, int groundDistance, double ratio, int pixelPerMeter){
+	public StraighteningFunction(List<Point> edgesPoints, ColorImage image, int groundDistance, double ratio, int pixelPerMeter) {
 		this.beginPoints = new ArrayList<Point>(edgesPoints);
 		this.endPoints = new ArrayList<Point>();
 		
 		computeEndPoints(groundDistance * pixelPerMeter, ratio);
 		
-		straightenFront(image);
+		this.result = this.straightenImage(image, beginPoints, endPoints);
 	}
 
 	/**
@@ -38,14 +42,14 @@ public class StraighteningFunction {
 	 * @param an horizontal vanishing point
 	 * @param pixelPerMeter
 	 */
-	public StraighteningFunction(List<Point> edgesPoints, ColorImage image, int groundDistance, Point horizontalVanishingPoint, int pixelPerMeter){
+	public StraighteningFunction(List<Point> edgesPoints, ColorImage image, int groundDistance, Point horizontalVanishingPoint, int pixelPerMeter) {
 		this.beginPoints = new ArrayList<Point>(edgesPoints);
 		this.horizontalVanishingPoint = horizontalVanishingPoint;
 		this.endPoints = new ArrayList<Point>();
 		
 		computeEndPoints(groundDistance* pixelPerMeter);
 		
-		straightenFront(image);
+		this.result = this.straightenImage(image, beginPoints, endPoints);
 	}
 	
 	//TODO Correct this when good vanishing points
@@ -53,7 +57,7 @@ public class StraighteningFunction {
 	 * Compute end points from a ground distance in pixels and deduces height/width ratio from the corresponding horizontal vanishing point.
 	 * @param groundDistance
 	 */
-	private void computeEndPoints(double pixelGroundDistance){
+	private void computeEndPoints(double pixelGroundDistance) {
 		//This algorithm is under the hypothesis vertical vanishing point is very further to image than others.
 		this.beginPoints = Homography.sortPoints(this.beginPoints);
 		int index = horizontalVanishingPoint.getX() > beginPoints.get(0).getX() ? 1 : 2;
@@ -83,7 +87,7 @@ public class StraighteningFunction {
 	 * @param height/width ratio
 	 * @param pixelPerMeter
 	 */
-	private void computeEndPoints(double pixelGroundDistance, double ratio){
+	private void computeEndPoints(double pixelGroundDistance, double ratio) {
 		int width = (int) Math.ceil(pixelGroundDistance);
 		int height = (int) Math.ceil(width * ratio);
 		
@@ -102,10 +106,49 @@ public class StraighteningFunction {
 	 * Computes the point to point homography from begin and end points
 	 * @param file
 	 */
-	private void straightenFront(ColorImage image){
+	private ColorImage straightenImage(ColorImage source, List<Point> beginPoints, List<Point> endPoints) {
 		Homography h = new Homography(beginPoints, endPoints);
-		ImageStraightening i = new ImageStraightening(image);
-		i.straightenUp(h);
+		
+		// inits
+		Matrix revHomography = h.reverseSquareHomography;
+		int width = (int) Math.abs(Math.ceil(h.endPoints.get(3).getX()-h.endPoints.get(0).getX()));
+		int height = (int) Math.abs(Math.ceil(h.endPoints.get(1).getY()-h.endPoints.get(0).getY()));
+		
+		ColorImage result = new ColorImage(width, height);
+		
+		// Pixels vectors
+		Matrix X = new Matrix(3,1);
+		Matrix Y = new Matrix(3,1);
+		X.set(2, 0, 1);
+		
+		for (int i=0;i<width;i++) {
+			for (int j=0;j<height;j++) {
+				// Pixels' coordinates
+				X.set(0, 0, i);
+				X.set(1, 0, j);
+				// reverse side transformation
+				Y = revHomography.times(X);
+				
+				int x = (int) (Y.get(0, 0)/Y.get(2, 0));
+				int y = (int) (Y.get(1, 0)/Y.get(2, 0));
+				
+				if (x > source.getWidth() || x < 0 || y > source.getHeight() || y < 0) {
+					continue;
+				}
+				
+				int pixel = source.getPixel(x, y);
+				result.setPixel(i, j, pixel);
+			}
+		}
+		
+		return result;
+	}
+
+	/**
+	 * @return the result
+	 */
+	public ColorImage getResult() {
+		return result;
 	}
 	
 }

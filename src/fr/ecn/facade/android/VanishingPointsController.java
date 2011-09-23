@@ -10,10 +10,10 @@ import android.util.Log;
 
 import jjil.android.RgbImageAndroid;
 import jjil.core.Image;
+import fr.ecn.common.geometry.Point;
 import fr.ecn.facade.android.utils.ImageLoader;
 import fr.ecn.facade.android.utils.ImageUtils;
 import fr.ecn.facade.core.model.ImageInfos;
-import fr.ecn.facade.core.model.Point;
 import fr.ecn.facade.segmentdetection.ImageSegment;
 import fr.ecn.facade.segmentdetection.Segment;
 import fr.irstv.dataModel.CircleKDistance;

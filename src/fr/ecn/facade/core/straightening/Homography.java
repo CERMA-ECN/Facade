@@ -1,6 +1,7 @@
 package fr.ecn.facade.core.straightening;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Jama.Matrix;
 import fr.ecn.common.geometry.Point;
@@ -20,7 +21,7 @@ public class Homography {
 	//protected DataPoint a1,a2,a3,a4,b1,b2,b3,b4;
 	
 	// construction avec 4 points de contrôle
-	public Homography(ArrayList<Point> beginPoints, ArrayList<Point> endPoints) {
+	public Homography(List<Point> beginPoints, List<Point> endPoints) {
 		homography = new Matrix(8,1);
 		leftMember = new Matrix(8,8);
 		rightMember = new Matrix(8,1);
@@ -101,7 +102,7 @@ public class Homography {
 	 * @param The input points "inputPoints" in an ArrayList<Points>
 	 * @return The sorted points in an ArrayList<Points>
 	 */
-	public static ArrayList<Point> sortPoints(ArrayList<Point> inputPoints){
+	public static ArrayList<Point> sortPoints(List<Point> inputPoints){
 		ArrayList<Point> tempSortedPoints = new ArrayList<Point>();
 		ArrayList<Point> sortedPoints = new ArrayList<Point>();
 		tempSortedPoints.add(inputPoints.get(0));

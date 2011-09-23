@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import fr.ecn.common.geometry.Point;
+
 public class Face implements Serializable {
 
 	/**

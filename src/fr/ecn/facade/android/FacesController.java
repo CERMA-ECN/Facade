@@ -6,10 +6,10 @@ import java.util.List;
 import android.graphics.Bitmap;
 
 import jjil.android.RgbImageAndroid;
+import fr.ecn.common.geometry.Point;
 import fr.ecn.facade.android.utils.ImageLoader;
 import fr.ecn.facade.core.model.Face;
 import fr.ecn.facade.core.model.ImageInfos;
-import fr.ecn.facade.core.model.Point;
 import fr.ecn.facade.core.utils.FaceExctractor;
 import fr.ecn.facade.scissor.Polygon;
 import fr.ecn.facade.scissor.SCISSOR_STATE;

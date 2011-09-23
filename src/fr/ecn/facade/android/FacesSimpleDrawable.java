@@ -5,12 +5,13 @@ import java.util.List;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
+import fr.ecn.common.geometry.Point;
 import fr.ecn.facade.android.utils.Drawing;
 import fr.ecn.facade.core.model.Face;
-import fr.ecn.facade.core.model.Point;
 
 public class FacesSimpleDrawable extends Drawable {
 
@@ -26,6 +27,8 @@ public class FacesSimpleDrawable extends Drawable {
 
 	@Override
 	public void draw(Canvas canvas) {
+		canvas.drawBitmap(this.controller.getBitmap(), new Matrix(), null);
+		
 		Paint paint = new Paint();
 		paint.setColor(Color.YELLOW);
 		paint.setStyle(Paint.Style.STROKE);
@@ -68,6 +71,23 @@ public class FacesSimpleDrawable extends Drawable {
 	public void setColorFilter(ColorFilter arg0) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/* (non-Javadoc)
+	 * @see android.graphics.drawable.Drawable#getIntrinsicHeight()
+	 */
+	@Override
+	public int getIntrinsicHeight() {
+		return this.controller.getBitmap().getHeight();
+	}
+
+	/* (non-Javadoc)
+	 * @see android.graphics.drawable.Drawable#getIntrinsicWidth()
+	 */
+	@Override
+	public int getIntrinsicWidth() {
+		// TODO Auto-generated method stub
+		return this.controller.getBitmap().getWidth();
 	}
 
 }
