@@ -8,4 +8,5 @@
 	<string name="menu_validate">Valider</string>
 	<string name="end_face">Terminer la face</string>
 	<string name="cancel_face">Annuler la face</string>
+	<string name="save_image">Sauvegarder l\'image</string>
 </resources>

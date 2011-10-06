@@ -5,11 +5,10 @@ import java.util.List;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
-import fr.ecn.common.geometry.Point;
+import fr.ecn.common.core.geometry.Point;
 import fr.ecn.facade.android.utils.Drawing;
 import fr.ecn.facade.core.model.Face;
 
@@ -27,8 +26,6 @@ public class FacesSimpleDrawable extends Drawable {
 
 	@Override
 	public void draw(Canvas canvas) {
-		canvas.drawBitmap(this.controller.getBitmap(), new Matrix(), null);
-		
 		Paint paint = new Paint();
 		paint.setColor(Color.YELLOW);
 		paint.setStyle(Paint.Style.STROKE);

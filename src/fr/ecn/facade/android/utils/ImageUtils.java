@@ -1,14 +1,11 @@
 package fr.ecn.facade.android.utils;
 
-import android.graphics.Bitmap;
-
 import jjil.algorithm.Gray8Hist;
 import jjil.algorithm.RgbAvgGray;
 import jjil.core.Error;
 import jjil.core.Gray8Image;
 import jjil.core.Image;
 import jjil.core.RgbImage;
-import fr.ecn.facade.core.image.filters.Gray8toRgb;
 
 /**
  * @author jerome
@@ -89,45 +86,4 @@ public class ImageUtils {
 		}
 	}
 	
-	/**
-	 * Convert an image to a RgbImage
-	 * 
-	 * @param image
-	 * @return
-	 */
-	public static RgbImage toRgb(Image image) {
-		if (image instanceof RgbImage) {
-			return (RgbImage) image;
-		} else if (image instanceof Gray8Image) {
-			Gray8toRgb convertor = new Gray8toRgb();
-			try {
-				convertor.push(image);
-				return (RgbImage) convertor.getFront();
-			} catch (Error e) {
-				//Shouldn't append
-				return null;
-			}
-		} else {
-			//TODO
-			return null;
-		}
-	}
-	
-	/**
-	 * Convert an image to a Bitmap
-	 * 
-	 * @param image
-	 * @return
-	 */
-	public static Bitmap toBitmap(Image image) {
-		RgbImage rgbImage = toRgb(image);
-		
-		Bitmap b =  Bitmap.createBitmap(
-				rgbImage.getData(),
-				rgbImage.getWidth(),
-				rgbImage.getHeight(), 
-                Bitmap.Config.ARGB_8888);
-		
-		return b;
-	}
 }

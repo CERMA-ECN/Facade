@@ -2,20 +2,21 @@ package fr.ecn.facade.android;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import jjil.android.RgbImageAndroid;
-import jjil.core.Image;
-import fr.ecn.common.geometry.Point;
-import fr.ecn.facade.android.utils.ImageLoader;
-import fr.ecn.facade.android.utils.ImageUtils;
+import fr.ecn.common.android.image.BitmapConvertor;
+import fr.ecn.common.android.image.BitmapLoader;
+import fr.ecn.common.core.geometry.Point;
+import fr.ecn.common.core.geometry.Segment;
+import fr.ecn.common.core.image.Image;
+import fr.ecn.common.core.image.utils.ImageConvertor;
+import fr.ecn.common.core.segmentdetection.EdgeDetection;
+import fr.ecn.common.core.segmentdetection.Edgel;
+import fr.ecn.common.core.segmentdetection.SegmentDetection;
 import fr.ecn.facade.core.model.ImageInfos;
-import fr.ecn.facade.segmentdetection.ImageSegment;
-import fr.ecn.facade.segmentdetection.Segment;
 import fr.irstv.dataModel.CircleKDistance;
 import fr.irstv.kmeans.CleaningDataGroups;
 import fr.irstv.kmeans.DataGroup;
@@ -53,15 +54,15 @@ public class VanishingPointsController {
 	 */
 	protected Bitmap bitmap;
 	
-	protected Map<Integer, List<Segment>> segments;
+	protected List<Segment> segments;
 	protected DataGroup[] groups;
 	
 	protected boolean[] selectedGroups;
 
 	public VanishingPointsController(ImageInfos imageInfos) {
-		Bitmap bitmap = ImageLoader.loadResized(imageInfos.getPath(), 600);
+		Bitmap bitmap = BitmapLoader.loadResized(imageInfos.getPath(), 600).bitmap;
 		
-		Image image = ImageUtils.toGray8(RgbImageAndroid.toRgbImage(bitmap));
+		Image image = ImageConvertor.toByte(BitmapConvertor.bitmapToImage(bitmap));
 		
 		//We don't need the bitmap anymore
 		bitmap.recycle();
@@ -71,16 +72,16 @@ public class VanishingPointsController {
 		
 		this.computeGroups();
 		
-		this.bitmap = ImageUtils.toBitmap(image);
+		this.bitmap = BitmapConvertor.imageToBitmap(ImageConvertor.toColor(image));
 	}
 	
 	public void computeSegments(Image image) {
 		Log.i("Ombre", "Starting segments computation");
 		long time = System.nanoTime();
+
+		List<Edgel> edgels = new EdgeDetection(image, 100f).getEdgels();
 		
-		ImageSegment is = new ImageSegment(image);
-		is.getLargeConnectedEdges(false, 8);
-		this.segments = is.getFinalSegmentMap();
+		this.segments = new SegmentDetection(edgels, image, 8).getSegments();
 		
 		Log.i("Ombre", "Segments computation done in " + (System.nanoTime() - time));
 	}

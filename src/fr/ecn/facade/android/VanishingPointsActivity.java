@@ -44,6 +44,7 @@ public class VanishingPointsActivity extends Activity {
 
 	protected VanishingPointsController controller;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

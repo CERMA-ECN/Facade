@@ -5,9 +5,9 @@ import java.util.List;
 
 import Jama.Matrix;
 
-import fr.ecn.common.geometry.Distance;
-import fr.ecn.common.geometry.Point;
-import fr.ecn.common.image.ColorImage;
+import fr.ecn.common.core.geometry.Distance;
+import fr.ecn.common.core.geometry.Point;
+import fr.ecn.common.core.image.ColorImage;
 
 public class StraighteningFunction {
 

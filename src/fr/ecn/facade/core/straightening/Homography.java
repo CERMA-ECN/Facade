@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Jama.Matrix;
-import fr.ecn.common.geometry.Point;
+import fr.ecn.common.core.geometry.Point;
 
 public class Homography {
 	

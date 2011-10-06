@@ -167,10 +167,23 @@ public class Segment {
 		double yb = beginPoint.get(1);
 		double xe = endPoint.get(0);
 		double ye = endPoint.get(1);
+
+		//Horizontal lines
+		if (yb == ye) {
+			hPoint.set(0, 0);
+			hPoint.set(1, yb);
+			return hPoint;
+		}
 		
+		//Vertical lines
+		if (xb == xe) {
+			hPoint.set(0, xb);
+			hPoint.set(1, 0);
+			return hPoint;
+		}
 		
 		double xh = (ye-yb)*(xb*ye-yb*xe)/((xe-xb)*(xe-xb)+(ye-yb)*(ye-yb)); 
-		double yh = -(xe-xb)*xh/(ye-yb);	
+		double yh = -(xe-xb)*xh/(ye-yb);
 		
 		hPoint.set(0, xh);
 		hPoint.set(1, yh);

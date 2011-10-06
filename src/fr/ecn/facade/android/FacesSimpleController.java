@@ -6,14 +6,15 @@ import java.util.List;
 
 import android.graphics.Bitmap;
 
-import fr.ecn.common.geometry.Point;
-import fr.ecn.facade.android.utils.ImageLoader;
+import fr.ecn.common.android.image.BitmapLoader;
+import fr.ecn.common.core.geometry.Point;
 import fr.ecn.facade.core.model.Face;
 import fr.ecn.facade.core.model.ImageInfos;
 
 public class FacesSimpleController {
 	
 	protected Bitmap bitmap;
+	protected float scale;
 	
 	// We explicitly need a LinkedList here because we need the capacity to
 	// remove the last element of the list
@@ -24,7 +25,10 @@ public class FacesSimpleController {
 	protected List<Point> points = null;
 
 	public FacesSimpleController(ImageInfos imageInfos) {
-		this.bitmap = ImageLoader.loadResized(imageInfos.getPath(), 600);
+		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), 600);
+		
+		this.bitmap = resizedBitmap.bitmap;
+		this.scale = resizedBitmap.scale;
 	}
 	
 	/**
@@ -80,6 +84,29 @@ public class FacesSimpleController {
 	 */
 	public List<Point> getPoints() {
 		return points;
+	}
+	
+	/**
+	 * Return a list of faces scaled to the original size of the image
+	 * 
+	 * @return
+	 */
+	public List<Face> getFinalFaces() {
+		List<Face> faces = new LinkedList<Face>();
+		
+		for (Face face : this.faces) {
+			Point[] resizedPoints = face.getPoints();
+			Point[] finalPoints = new Point[resizedPoints.length];
+
+			for (int i = 0; i < resizedPoints.length; i++) {
+				Point point = resizedPoints[i];
+				finalPoints[i] = new Point(point.getX() / scale, point.getY() / scale);
+			}
+			
+			faces.add(new Face(finalPoints));
+		}
+		
+		return faces;
 	}
 
 }

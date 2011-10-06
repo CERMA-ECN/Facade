@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import fr.ecn.common.geometry.Point;
+import fr.ecn.common.core.geometry.Point;
 
 public class Face implements Serializable {
 
@@ -17,6 +17,16 @@ public class Face implements Serializable {
 	 * Points of the face
 	 */
 	protected Point[] points;
+
+	/**
+	 * Create a face from an array of points
+	 * 
+	 * @param points
+	 */
+	public Face(Point[] points) {
+		super();
+		this.points = points;
+	}
 
 	/**
 	 * Create a Face from 4 points.

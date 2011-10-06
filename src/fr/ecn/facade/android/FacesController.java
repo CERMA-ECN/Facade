@@ -6,8 +6,8 @@ import java.util.List;
 import android.graphics.Bitmap;
 
 import jjil.android.RgbImageAndroid;
-import fr.ecn.common.geometry.Point;
-import fr.ecn.facade.android.utils.ImageLoader;
+import fr.ecn.common.android.image.BitmapLoader;
+import fr.ecn.common.core.geometry.Point;
 import fr.ecn.facade.core.model.Face;
 import fr.ecn.facade.core.model.ImageInfos;
 import fr.ecn.facade.core.utils.FaceExctractor;
@@ -19,6 +19,7 @@ import fr.ecn.facade.scissor.ScissorLine;
 public class FacesController {
 
 	protected Bitmap bitmap;
+	protected float scale;
 
 	protected Scissor scissor;
 	
@@ -36,7 +37,10 @@ public class FacesController {
 	public FacesController(ImageInfos imageInfos) {
 		super();
 
-		this.bitmap = ImageLoader.loadResized(imageInfos.getPath(), 600);
+		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), 600);
+		
+		this.bitmap = resizedBitmap.bitmap;
+		this.scale = resizedBitmap.scale;
 
 		this.scissor = new Scissor(RgbImageAndroid.toRgbImage(bitmap));
 	}
@@ -156,6 +160,29 @@ public class FacesController {
 	 * @return the faces
 	 */
 	public List<Face> getFaces() {
+		return faces;
+	}
+	
+	/**
+	 * Return a list of faces scaled to the original size of the image
+	 * 
+	 * @return
+	 */
+	public List<Face> getFinalFaces() {
+		List<Face> faces = new LinkedList<Face>();
+		
+		for (Face face : this.faces) {
+			Point[] resizedPoints = face.getPoints();
+			Point[] finalPoints = new Point[resizedPoints.length];
+
+			for (int i = 0; i < resizedPoints.length; i++) {
+				Point point = resizedPoints[i];
+				finalPoints[i] = new Point(point.getX() / scale, point.getY() / scale);
+			}
+			
+			faces.add(new Face(finalPoints));
+		}
+		
 		return faces;
 	}
 }
