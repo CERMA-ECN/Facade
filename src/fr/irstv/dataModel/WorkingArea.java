@@ -206,13 +206,13 @@ public class WorkingArea {
 	/**
 	 * Give the coordinates of the (0,0) point from the image reference in the working area reference.
 	 */
-	private DataPoint calculateZeroPoint(int[] area){
-		DataPoint zero = new DataPoint(2);
-		zero.set(0, -area[0]);
-		zero.set(1, -area[2]);
-
-		return zero;
-	}
+//	private DataPoint calculateZeroPoint(int[] area){
+//		DataPoint zero = new DataPoint(2);
+//		zero.set(0, -area[0]);
+//		zero.set(1, -area[2]);
+//
+//		return zero;
+//	}
 
 
 	public int getXSize(){

@@ -191,30 +191,6 @@ public class Segment {
 		return hPoint;
 	}
 
-
-	/**
-	 * @uml.property  name="imageModel"
-	 */
-	private ImageModel imageModel;
-
-	/**
-	 * Getter of the property <tt>imageModel</tt>
-	 * @return  Returns the imageModel.
-	 * @uml.property  name="imageModel"
-	 */
-	public ImageModel getImageModel() {
-		return imageModel;
-	}
-
-	/**
-	 * Setter of the property <tt>imageModel</tt>
-	 * @param imageModel  The imageModel to set.
-	 * @uml.property  name="imageModel"
-	 */
-	public void setImageModel(ImageModel imageModel) {
-		this.imageModel = imageModel;
-	}
-
 		
 
 

@@ -3,7 +3,6 @@ package fr.irstv.kmeans;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import fr.irstv.dataModel.DataPoint;
 import fr.irstv.dataModel.MkDataPoint;

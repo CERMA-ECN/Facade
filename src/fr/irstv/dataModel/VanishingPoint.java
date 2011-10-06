@@ -1,8 +1,6 @@
  package fr.irstv.dataModel;
 
 import java.util.LinkedList;
-import java.util.Collection;
-import java.util.Iterator;
 
 
 public class VanishingPoint extends DataPoint {
@@ -17,12 +15,6 @@ public class VanishingPoint extends DataPoint {
 	 * @uml.associationEnd   multiplicity="(1 1)" inverse="vanishingPoint:fr.irstv.dataModel.CircleK"
 	 */
 	private CircleK circleK = null;
-
-	/**
-	 * @uml.property   name="imageModel"
-	 * @uml.associationEnd   multiplicity="(0 -1)" inverse="vanishingPoint:fr.irstv.dataModel.ImageModel"
-	 */
-	private ImageModel imageModel;
 
 	public VanishingPoint(int dim) {
 		super(dim);
@@ -76,24 +68,6 @@ public class VanishingPoint extends DataPoint {
 	 */
 	public void setCircleK(CircleK circleK) {
 		this.circleK = circleK;
-	}
-
-	/**
-	 * Getter of the property <tt>imageModel</tt>
-	 * @return  Returns the imageModel.
-	 * @uml.property  name="imageModel"
-	 */
-	public ImageModel getImageModel() {
-		return imageModel;
-	}
-
-	/**
-	 * Setter of the property <tt>imageModel</tt>
-	 * @param imageModel  the imageModel to set.
-	 * @uml.property  name="imageModel"
-	 */
-	public void setImageModel(ImageModel imageModel) {
-		this.imageModel = imageModel;
 	}
 
 
