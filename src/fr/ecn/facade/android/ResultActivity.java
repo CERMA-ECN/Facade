@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import fr.ecn.common.android.Dialog;
+import fr.ecn.common.android.DialogHelper;
 import fr.ecn.facade.core.model.ImageInfos;
 
 /**
@@ -68,7 +68,7 @@ public class ResultActivity extends Activity {
 					
 					runOnUiThread(new Runnable() {
 						public void run() {
-							Dialog.errorDialog(ResultActivity.this, "Une erreur c'est produite lors du calcul du résultat");
+							DialogHelper.errorDialog(ResultActivity.this, "Une erreur c'est produite lors du calcul du résultat");
 						}
 					});
 				}
