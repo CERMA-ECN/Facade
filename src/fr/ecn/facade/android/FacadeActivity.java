@@ -11,7 +11,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
-import fr.ecn.facade.core.model.ImageInfos;
+import fr.ecn.common.core.imageinfos.ImageInfos;
 
 public class FacadeActivity extends Activity {
 	

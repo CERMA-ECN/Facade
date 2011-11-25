@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import fr.ecn.common.android.DialogHelper;
-import fr.ecn.facade.core.model.ImageInfos;
+import fr.ecn.common.core.imageinfos.ImageInfos;
 
 /**
  * @author jerome

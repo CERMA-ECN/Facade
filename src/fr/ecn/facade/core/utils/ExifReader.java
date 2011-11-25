@@ -11,7 +11,7 @@ import com.drew.metadata.exif.GpsDescriptor;
 import com.drew.metadata.exif.GpsDirectory;
 
 import fr.ecn.common.core.imageinfos.Coordinate;
-import fr.ecn.facade.core.model.ImageInfos;
+import fr.ecn.common.core.imageinfos.ImageInfos;
 
 /**
  * Helper class for reading Exif data from a JPEG file

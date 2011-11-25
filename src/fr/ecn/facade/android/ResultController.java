@@ -11,7 +11,7 @@ import fr.ecn.common.android.image.BitmapLoader;
 import fr.ecn.common.core.geometry.Point;
 import fr.ecn.common.core.image.ColorImage;
 import fr.ecn.common.core.imageinfos.Face;
-import fr.ecn.facade.core.model.ImageInfos;
+import fr.ecn.common.core.imageinfos.ImageInfos;
 import fr.ecn.facade.core.straightening.StraighteningFunction;
 
 public class ResultController {

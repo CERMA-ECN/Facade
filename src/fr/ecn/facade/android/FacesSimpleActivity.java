@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 
-import fr.ecn.facade.core.model.ImageInfos;
+import fr.ecn.common.core.imageinfos.ImageInfos;
 
 /**
  * An activity to select faces with the user giving the 4 corners of the face

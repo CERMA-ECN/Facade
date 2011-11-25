@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import fr.ecn.facade.core.model.ImageInfos;
+import fr.ecn.common.core.imageinfos.ImageInfos;
 
 /**
  * Activity used to compute and select segments groups and vanishing points

@@ -9,7 +9,7 @@ import jjil.android.RgbImageAndroid;
 import fr.ecn.common.android.image.BitmapLoader;
 import fr.ecn.common.core.geometry.Point;
 import fr.ecn.common.core.imageinfos.Face;
-import fr.ecn.facade.core.model.ImageInfos;
+import fr.ecn.common.core.imageinfos.ImageInfos;
 import fr.ecn.facade.core.utils.FaceExctractor;
 import fr.ecn.facade.scissor.Polygon;
 import fr.ecn.facade.scissor.SCISSOR_STATE;
