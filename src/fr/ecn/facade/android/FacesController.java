@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
 import jjil.android.RgbImageAndroid;
 import fr.ecn.common.android.image.BitmapLoader;
 import fr.ecn.common.core.geometry.Point;
-import fr.ecn.facade.core.model.Face;
+import fr.ecn.common.core.imageinfos.Face;
 import fr.ecn.facade.core.model.ImageInfos;
 import fr.ecn.facade.core.utils.FaceExctractor;
 import fr.ecn.facade.scissor.Polygon;
@@ -169,20 +169,18 @@ public class FacesController {
 	 * @return
 	 */
 	public List<Face> getFinalFaces() {
-		List<Face> faces = new LinkedList<Face>();
+		List<Face> finalFaces = new LinkedList<Face>();
 		
 		for (Face face : this.faces) {
-			Point[] resizedPoints = face.getPoints();
-			Point[] finalPoints = new Point[resizedPoints.length];
+			Face finalFace = new Face();
 
-			for (int i = 0; i < resizedPoints.length; i++) {
-				Point point = resizedPoints[i];
-				finalPoints[i] = new Point(point.getX() / scale, point.getY() / scale);
+			for (Point point : face.getPoints()) {
+				finalFace.getPoints().add(new Point(point.getX() / scale, point.getY() / scale));
 			}
 			
-			faces.add(new Face(finalPoints));
+			finalFaces.add(finalFace);
 		}
 		
-		return faces;
+		return finalFaces;
 	}
 }

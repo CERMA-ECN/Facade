@@ -9,8 +9,8 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
+import fr.ecn.common.core.imageinfos.Face;
 import fr.ecn.facade.android.utils.Drawing;
-import fr.ecn.facade.core.model.Face;
 
 /**
  * @author jerome

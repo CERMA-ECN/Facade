@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.ecn.common.core.geometry.Point;
 import fr.ecn.common.core.imageinfos.Coordinate;
+import fr.ecn.common.core.imageinfos.Face;
 
 public class ImageInfos implements Serializable {
 	/**

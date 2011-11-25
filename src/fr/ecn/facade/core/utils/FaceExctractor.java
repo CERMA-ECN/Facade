@@ -3,7 +3,7 @@ package fr.ecn.facade.core.utils;
 import java.util.List;
 
 import fr.ecn.common.core.geometry.Point;
-import fr.ecn.facade.core.model.Face;
+import fr.ecn.common.core.imageinfos.Face;
 
 public class FaceExctractor {
 	
@@ -60,7 +60,12 @@ public class FaceExctractor {
 			}
 		}
 		
-		return new Face(p1, p2, p3, p4);
+		Face face = new Face();
+		face.getPoints().add(p1);
+		face.getPoints().add(p2);
+		face.getPoints().add(p3);
+		face.getPoints().add(p4);
+		return face;
 	}
 
 	private Point barycenter(List<Point> points) {

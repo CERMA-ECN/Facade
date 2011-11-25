@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
 
 import fr.ecn.common.android.image.BitmapLoader;
 import fr.ecn.common.core.geometry.Point;
-import fr.ecn.facade.core.model.Face;
+import fr.ecn.common.core.imageinfos.Face;
 import fr.ecn.facade.core.model.ImageInfos;
 
 public class FacesSimpleController {
@@ -46,7 +46,10 @@ public class FacesSimpleController {
 		this.points.add(new Point(x, y));
 		
 		if (this.points.size() == 4) {
-			this.faces.add(new Face(this.points.get(0), this.points.get(1), this.points.get(2), this.points.get(3)));
+			Face face = new Face();
+			face.getPoints().addAll(this.points);
+			
+			this.faces.add(face);
 			this.points = null;
 		}
 	}
@@ -92,21 +95,19 @@ public class FacesSimpleController {
 	 * @return
 	 */
 	public List<Face> getFinalFaces() {
-		List<Face> faces = new LinkedList<Face>();
+		List<Face> finalFaces = new LinkedList<Face>();
 		
 		for (Face face : this.faces) {
-			Point[] resizedPoints = face.getPoints();
-			Point[] finalPoints = new Point[resizedPoints.length];
+			Face finalFace = new Face();
 
-			for (int i = 0; i < resizedPoints.length; i++) {
-				Point point = resizedPoints[i];
-				finalPoints[i] = new Point(point.getX() / scale, point.getY() / scale);
+			for (Point point : face.getPoints()) {
+				finalFace.getPoints().add(new Point(point.getX() / scale, point.getY() / scale));
 			}
 			
-			faces.add(new Face(finalPoints));
+			finalFaces.add(finalFace);
 		}
 		
-		return faces;
+		return finalFaces;
 	}
 
 }

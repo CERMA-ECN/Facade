@@ -1,6 +1,6 @@
 package fr.ecn.facade.android;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -10,7 +10,7 @@ import fr.ecn.common.android.image.BitmapConvertor;
 import fr.ecn.common.android.image.BitmapLoader;
 import fr.ecn.common.core.geometry.Point;
 import fr.ecn.common.core.image.ColorImage;
-import fr.ecn.facade.core.model.Face;
+import fr.ecn.common.core.imageinfos.Face;
 import fr.ecn.facade.core.model.ImageInfos;
 import fr.ecn.facade.core.straightening.StraighteningFunction;
 
@@ -48,15 +48,12 @@ public class ResultController {
 		//Get the first (and only) face
 		Face face = imageInfos.getFaces().get(0);
 
-		Point[] resizedPoints = face.getPoints();
-		Point[] finalPoints = new Point[resizedPoints.length];
+		List<Point> resizedPoints = face.getPoints();
+		List<Point> edgesPoints = new ArrayList<Point>(resizedPoints.size());
 
-		for (int i = 0; i < resizedPoints.length; i++) {
-			Point point = resizedPoints[i];
-			finalPoints[i] = new Point(point.getX() * scale, point.getY() * scale);
+		for (Point point : resizedPoints) {
+			edgesPoints.add(new Point(point.getX() * scale, point.getY() * scale));
 		}
-		
-		List<Point> edgesPoints = Arrays.asList(finalPoints);
 		
 		//Get a vanishing point
 		Point vanishingPoint = imageInfos.getVanishingPoints().get(0);

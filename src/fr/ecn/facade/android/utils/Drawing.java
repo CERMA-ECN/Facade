@@ -5,7 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 import fr.ecn.common.core.geometry.Point;
-import fr.ecn.facade.core.model.Face;
+import fr.ecn.common.core.imageinfos.Face;
 
 /**
  * @author jerome
@@ -22,7 +22,7 @@ public class Drawing {
 	 * @param paint the paint to use to draw
 	 */
 	public static void drawFace(Face face, Canvas canvas, Paint paint) {
-		Point[] points = face.getPoints();
+		Point[] points = face.getPoints().toArray(new Point[0]);
 		
 		Path path = new Path();
 		path.moveTo((float) points[points.length-1].getX(), (float) points[points.length-1].getY());
