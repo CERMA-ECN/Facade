@@ -10,7 +10,7 @@ import com.drew.metadata.MetadataException;
 import com.drew.metadata.exif.GpsDescriptor;
 import com.drew.metadata.exif.GpsDirectory;
 
-import fr.ecn.facade.core.model.Coordinate;
+import fr.ecn.common.core.imageinfos.Coordinate;
 import fr.ecn.facade.core.model.ImageInfos;
 
 /**

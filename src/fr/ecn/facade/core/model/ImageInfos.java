@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import fr.ecn.common.core.geometry.Point;
+import fr.ecn.common.core.imageinfos.Coordinate;
 
 public class ImageInfos implements Serializable {
 	/**
