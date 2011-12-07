@@ -13,7 +13,6 @@ public class StraighteningFunction {
 
 	private ArrayList<Point> beginPoints;
 	private ArrayList<Point> endPoints;
-	private Point horizontalVanishingPoint;
 	
 	protected ColorImage result;
 	
@@ -44,10 +43,9 @@ public class StraighteningFunction {
 	 */
 	public StraighteningFunction(List<Point> edgesPoints, ColorImage image, int groundDistance, Point horizontalVanishingPoint, int pixelPerMeter) {
 		this.beginPoints = new ArrayList<Point>(edgesPoints);
-		this.horizontalVanishingPoint = horizontalVanishingPoint;
 		this.endPoints = new ArrayList<Point>();
 		
-		computeEndPoints(groundDistance* pixelPerMeter);
+		computeEndPoints(groundDistance* pixelPerMeter, horizontalVanishingPoint);
 		
 		this.result = this.straightenImage(image, beginPoints, endPoints);
 	}
@@ -57,7 +55,7 @@ public class StraighteningFunction {
 	 * Compute end points from a ground distance in pixels and deduces height/width ratio from the corresponding horizontal vanishing point.
 	 * @param groundDistance
 	 */
-	private void computeEndPoints(double pixelGroundDistance) {
+	private void computeEndPoints(double pixelGroundDistance, Point horizontalVanishingPoint) {
 		//This algorithm is under the hypothesis vertical vanishing point is very further to image than others.
 		this.beginPoints = Homography.sortPoints(this.beginPoints);
 		int index = horizontalVanishingPoint.getX() > beginPoints.get(0).getX() ? 1 : 2;
@@ -69,16 +67,8 @@ public class StraighteningFunction {
 		double width = pixelGroundDistance;
 		double height = width / ratio;
 		System.out.println("Width = " + width + ", height = " + height);
-		
-		Point upLeft = new Point(width, 0);
-		Point upRight = new Point(width, height);
-		Point downRight = new Point(0, height);
-		Point downLeft = new Point(0, 0);
-		
-		endPoints.add(upLeft);
-		endPoints.add(upRight);
-		endPoints.add(downRight);
-		endPoints.add(downLeft);
+
+		this.createEndPoints(width, height);
 	}
 	
 	/**
@@ -88,9 +78,13 @@ public class StraighteningFunction {
 	 * @param pixelPerMeter
 	 */
 	private void computeEndPoints(double pixelGroundDistance, double ratio) {
-		int width = (int) Math.ceil(pixelGroundDistance);
-		int height = (int) Math.ceil(width * ratio);
+		double width = pixelGroundDistance;
+		double height = width * ratio;
 		
+		this.createEndPoints(width, height);
+	}
+	
+	private void createEndPoints(double width, double height) {
 		Point upLeft = new Point(width, 0);
 		Point upRight = new Point(width, height);
 		Point downRight = new Point(0, height);
@@ -100,6 +94,7 @@ public class StraighteningFunction {
 		endPoints.add(upRight);
 		endPoints.add(downRight);
 		endPoints.add(downLeft);
+		
 	}
 	
 	/**
