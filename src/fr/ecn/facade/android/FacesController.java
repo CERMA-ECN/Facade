@@ -37,7 +37,7 @@ public class FacesController {
 	public FacesController(ImageInfos imageInfos) {
 		super();
 
-		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), 600);
+		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), BitmapLoader.maxDim);
 		
 		this.bitmap = resizedBitmap.bitmap;
 		this.scale = resizedBitmap.scale;

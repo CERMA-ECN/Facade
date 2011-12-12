@@ -37,7 +37,7 @@ public class ResultController {
 	private Bitmap resultBitmap;
 
 	public ResultController(ImageInfos imageInfos) {
-		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), 1200);
+		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), BitmapLoader.maxDim*2);
 		
 		Bitmap sourceBitmap = resizedBitmap.bitmap;
 		float scale = resizedBitmap.scale;

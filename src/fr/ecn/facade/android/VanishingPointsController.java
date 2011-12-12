@@ -60,7 +60,7 @@ public class VanishingPointsController {
 	protected boolean[] selectedGroups;
 
 	public VanishingPointsController(ImageInfos imageInfos) {
-		Bitmap bitmap = BitmapLoader.loadResized(imageInfos.getPath(), 600).bitmap;
+		Bitmap bitmap = BitmapLoader.loadResized(imageInfos.getPath(), BitmapLoader.maxDim).bitmap;
 		
 		Image image = ImageConvertor.toByte(BitmapConvertor.bitmapToImage(bitmap));
 		

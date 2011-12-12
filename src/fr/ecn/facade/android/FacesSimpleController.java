@@ -25,7 +25,7 @@ public class FacesSimpleController {
 	protected List<Point> points = null;
 
 	public FacesSimpleController(ImageInfos imageInfos) {
-		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), 600);
+		BitmapLoader.ResizedBitmap resizedBitmap = BitmapLoader.loadResized(imageInfos.getPath(), BitmapLoader.maxDim);
 		
 		this.bitmap = resizedBitmap.bitmap;
 		this.scale = resizedBitmap.scale;
